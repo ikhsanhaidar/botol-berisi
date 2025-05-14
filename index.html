@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>When God Created My Girlfriend</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Chewy", cursive;
+        background: linear-gradient(to bottom, #ffe0f0, #ffcce6);
+        color: #d63384;
+        text-align: center;
+        overflow-x: hidden;
+        position: relative;
+      }
+      h1 {
+        font-size: 2rem;
+        margin: 20px 0 10px;
+      }
+      .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+      .bottle-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 30px;
+        padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .bottle-wrapper {
+        position: relative;
+        animation: fadeIn 1s ease;
+        transition: transform 0.3s ease;
+      }
+      .bottle-wrapper:hover {
+        transform: scale(1.05) rotate(-2deg);
+      }
+      .bottle {
+        width: 100px;
+        height: 160px;
+        margin: 0 auto;
+        background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
+        border: 4px solid #ff99cc;
+        border-radius: 40% 40% 20% 20% / 30% 30% 10% 10%;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1),
+          inset 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      .bottle::before {
+        content: "";
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 40px;
+        background: #ff99cc;
+        border: 3px solid white;
+        border-radius: 50% / 40%;
+        z-index: 2;
+      }
+      .liquid {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(to top, #ffcce6, #d4a9bf);
+        border-top-left-radius: 50% 30%;
+        border-top-right-radius: 50% 30%;
+        animation: bobbing 2s infinite ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 5px;
+      }
+      .emojis {
+        font-size: 1.5rem;
+        animation: floatEmojis 3s infinite ease-in-out;
+      }
+      .label {
+        margin-top: 10px;
+        font-size: 1.1rem;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes bobbing {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
+      @keyframes floatEmojis {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+      .hearts {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+      }
+      .heart {
+        position: absolute;
+        font-size: 1.2rem;
+        color: #ff69b4;
+        animation: flyUp 4s linear infinite;
+      }
+      @keyframes flyUp {
+        0% {
+          transform: translate(-50%, 0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -150px) scale(1.5);
+          opacity: 0;
+        }
+      }
+      .music-btn {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: #ff99cc;
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 20px;
+        font-family: "Chewy", cursive;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      .music-btn.active {
+        animation: pulse 1s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+      }
+      #floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+      }
+      #floating-hearts .heart {
+        position: fixed;
+        font-size: 1.5rem;
+        animation: floatUp 5s linear forwards;
+        opacity: 0;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, #ffe0f0, #ffcce6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.8s ease;
+        font-family: "Chewy", cursive;
+      }
+      .loader-content {
+        font-size: 1.5rem;
+        color: #d63384;
+        animation: pulse 1.5s infinite;
+      }
+      @media only screen and (max-width: 768px) {
+        body {
+          font-size: 1.2rem;
+        }
+        .bottle-container {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 15px;
+        }
+        .bottle-wrapper {
+          transform: scale(0.95);
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        .music-btn {
+          font-size: 1rem;
+          padding: 8px 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preloader">
+      <div class="loader-content" id="loader-text">
+        💖 Membuat resep cinta...
+      </div>
+    </div>
+
+    <h1>When God Created My Girlfriend</h1>
+    <div class="subtitle">Inilah resep Tuhan saat menciptakan kamu 💖</div>
+    <div class="bottle-container"></div>
+    <div id="floating-hearts"></div>
+    <button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+    <audio id="bg-music" loop>
+      <source src="assets/bg-music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const data = [
+        { label: "Cantik", emojis: "😍✨💖💋👑", level: 100 }, // Memperindah ikon kecantikan
+        { label: "Komedi", emojis: "🥺💞🌸", level: 80 }, // Menambahkan ikon kelembutan
+        { label: "Ngambek", emojis: "😤💢😡", level: 1 }, // Menambahkan emosi marah
+        { label: "Suka pap", emojis: "📸🤳🎥", level: 100 }, // Memperbaiki ikon untuk foto dan video
+        { label: "Ngemil", emojis: "🍫🍪🍿🍩", level: 100 }, // Menambahkan makanan ringan
+        { label: "Galak", emojis: "😡💢🔥🤬", level: 1 }, // Menambahkan lebih banyak emosi marah
+        { label: "Baik hati", emojis: "😊💖🌸🙏", level: 100 }, // Menambahkan ikon kelembutan dan kasih sayang
+        { label: "Suka Cium", emojis: "💋💋😘❤️", level: 100 }, // Ikon ciuman dan cinta
+        { label: "Suka Insekyur", emojis: "😔💔🔒", level: 100 }, // Menggunakan ikon kecemasan atau ketidakamanan
+        { label: "Suka perhatian", emojis: "🥰👀💬", level: 100 }, // Menambahkan perhatian dan percakapan
+        { label: "Mood swing", emojis: "😅🎢🔄", level: 100 }, // Menambahkan ikon perubahan emosi
+        { label: "Lemot", emojis: "😢💔🐢💤", level: 20 }, // Menambahkan simbol lambat dan kelelahan
+      ];
+
+      const container = document.querySelector(".bottle-container");
+
+      data.forEach((item) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "bottle-wrapper";
+
+        const bottle = document.createElement("div");
+        bottle.className = "bottle";
+
+        const liquid = document.createElement("div");
+        liquid.className = "liquid";
+        liquid.style.height = item.level + "%";
+
+        const emojis = document.createElement("div");
+        emojis.className = "emojis";
+        emojis.innerText = item.emojis;
+
+        liquid.appendChild(emojis);
+
+        for (let b = 0; b < 3; b++) {
+          const bubble = document.createElement("div");
+          bubble.style.width = bubble.style.height = `${
+            Math.random() * 10 + 5
+          }px`;
+          bubble.style.borderRadius = "50%";
+          bubble.style.background = "rgba(255,255,255,0.7)";
+          bubble.style.position = "absolute";
+          bubble.style.bottom = `${Math.random() * 30}%`;
+          bubble.style.left = `${Math.random() * 80}%`;
+          bubble.style.opacity = 0.6;
+          liquid.appendChild(bubble);
+        }
+
+        bottle.appendChild(liquid);
+
+        for (let i = 0; i < 3; i++) {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.style.left = `${Math.random() * 80 + 10}%`;
+          heart.style.top = `${Math.random() * 20 + 30}%`;
+          heart.style.animationDelay = `${Math.random() * 3}s`;
+          heart.innerText = Math.random() > 0.5 ? "💖" : "💫";
+
+          const heartsContainer = document.createElement("div");
+          heartsContainer.className = "hearts";
+          heartsContainer.appendChild(heart);
+          wrapper.appendChild(heartsContainer);
+        }
+
+        wrapper.appendChild(bottle);
+
+        const label = document.createElement("div");
+        label.className = "label";
+        label.innerText = item.label;
+        wrapper.appendChild(label);
+
+        container.appendChild(wrapper);
+      });
+
+      function toggleMusic() {
+        const music = document.getElementById("bg-music");
+        const btn = document.querySelector(".music-btn");
+        if (music.paused) {
+          music.volume = 0;
+          music.play();
+          fadeVolume(music, 1);
+          btn.innerText = "⏸ Pause Music";
+          btn.classList.add("active");
+        } else {
+          fadeVolume(music, 0, () => music.pause());
+          btn.innerText = "🎵 Play Music";
+          btn.classList.remove("active");
+        }
+      }
+
+      function fadeVolume(audio, target, callback) {
+        const step = target > audio.volume ? 0.05 : -0.05;
+        const fade = setInterval(() => {
+          if (
+            (step > 0 && audio.volume >= target) ||
+            (step < 0 && audio.volume <= target)
+          ) {
+            clearInterval(fade);
+            if (callback) callback();
+          } else {
+            audio.volume = Math.min(1, Math.max(0, audio.volume + step));
+          }
+        }, 100);
+      }
+      window.onload = function () {
+        setTimeout(function () {
+          document.getElementById("preloader").style.display = "none"; // Sembunyikan preloader setelah 3 detik
+          playMusic(); // Panggil fungsi playMusic untuk memutar musik
+        }, 3000); // Waktu delay (3 detik)
+      };
+
+      function playMusic() {
+        const music = document.getElementById("bg-music");
+        music.play(); // Putar musik latar belakang
+      }
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = Math.random() > 0.5 ? "💖" : "💘";
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = "100vh";
+        document.getElementById("floating-hearts").appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 500);
+      const phrases = [
+        "💖 Membuat resep cinta...",
+        "🧪 Menambahkan sifat setiap cinta...",
+        "✨ Menuangkan cinta tanpa batas...",
+        "💬 Menyiapkan emoji lucu...",
+        "🎀 Hampir selesai...",
+      ];
+
+      let currentPhrase = 0;
+      const loaderText = document.getElementById("loader-text");
+
+      // Ganti teks tiap 1.2 detik
+      const phraseInterval = setInterval(() => {
+        currentPhrase = (currentPhrase + 1) % phrases.length;
+        loaderText.innerText = phrases[currentPhrase];
+      }, 1200);
+
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        setTimeout(() => {
+          preloader.style.opacity = 0;
+          clearInterval(phraseInterval);
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 800);
+        }, 6000); // Atur durasi preloader di sini (ms)
+      });
+    </script>
+  </body>
+</html>
